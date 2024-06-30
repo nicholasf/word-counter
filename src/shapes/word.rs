@@ -1,8 +1,6 @@
-use uuid::Uuid;
-
 pub struct Word {
-    word: str,
-    id: Uuid
+    pub word: String,
+    pub id: u8
 }
 
 pub struct Empty {}
