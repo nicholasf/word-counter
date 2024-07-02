@@ -1,7 +1,7 @@
-mod shapes;
+mod entities;
 
 use std::env;
-use crate::shapes::word::{ Empty, Word };
+use crate::entities::word::{ Empty, Word };
 
 fn main() {
     let filename = env::args().nth(1).expect("No filename given.");
