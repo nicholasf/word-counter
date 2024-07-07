@@ -1,6 +1,8 @@
+mod db;
 mod entities;
 
 use std::env;
+use crate::db::connection;
 use crate::entities::word::{ Empty, Word };
 
 fn main() {
