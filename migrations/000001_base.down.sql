@@ -1,3 +1,3 @@
 drop words,
 drop lines;
-drop files;
+drop sources;

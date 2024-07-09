@@ -1,15 +1,15 @@
-create table files (
+create table sources (
     id  int not null primary key,
-    name varchar(120)
+    url text not null
 );
 
 create table lines (
     id int not null primary key,
-    file_id int references files(id)
+    source_id int references sources(id)
 );
 
 create table words (
     id int not null primary key,
-    file_id int references lines(id),
+    source_id int references lines(id),
     word varchar(120)
 );
