@@ -5,6 +5,7 @@ create table sources (
 
 create table lines (
     id int not null primary key,
+    words int[],
     source_id int references sources(id)
 );
 
