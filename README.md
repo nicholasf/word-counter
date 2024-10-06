@@ -23,3 +23,16 @@ local   all             all                                     trust
 host    all             all             127.0.0.1/32            md5
 
 ```
+
+
+## Event structure
+
+```json
+
+{
+    "title": "",
+    "sentence": "",
+    "lineNumber": ""
+}
+
+```
