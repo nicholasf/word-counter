@@ -1,16 +1,34 @@
-mod db;
-mod entities;
+use axum::{
+    routing::post,
+    http::StatusCode,
+    Json, Router,
+};
+use serde::{Deserialize, Serialize};
 
-use std::env;
-use crate::entities::word::{ Empty, Word };
+#[tokio::main]
+async fn main() {
+    let app = Router::new()
+        .route("/", post(receive_word));
 
-fn main() {
-    let filename = env::args().nth(1).expect("No filename given.");
-    let word = env::args().nth(2).expect("No word given.");
-    println!("filename: {}", filename);
-    println!("word: {}", word);
+    let listener = tokio::net::TcpListener::bind("0.0.0.0:3000").await.unwrap();
+    axum::serve(listener, app).await.unwrap();
+}
 
-    // temp to make the compiler happy
-    let _ne = Empty{};
-    let _w = Word { word: "Hello".to_string() , id: 0 };
+async fn receive_word(Json(payload): Json<WordEvent>, ) ->  (StatusCode, Json<WordEvent>) {
+    let word_event = WordEvent {
+        title: payload.title,
+        word: payload.word,
+        word_number: payload.word_number
+    };
+
+    println!("{:?}", word_event);
+
+    (StatusCode::CREATED, Json(word_event))
+}
+
+#[derive(Deserialize, Serialize, Debug)]
+pub struct WordEvent {
+    pub title: String,
+    pub word: String,
+    pub word_number: u64 
 }

@@ -12,7 +12,7 @@ Any amount of text files holding human language words can be set into files. Eac
 {
     "title": "A Tale of Two Cities.",
     "word": "The",
-    "wordNumber": "1"
+    "word_number": "1"
 }
 ```
 
@@ -28,3 +28,8 @@ Running `make download_texts` will bring down 10 texts into the `/files` directo
 ## Directory Layout
 
 There are two `clients` and three `servers`. The clients are written in Go and Rust, and the servers are written in Node, Go and Rust. 
+
+## Database
+
+The same database will be used for all three server side implementations.
+
