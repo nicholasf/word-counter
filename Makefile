@@ -1,8 +1,6 @@
-$PHONY: up, down
+PHONY .download_texts
 
-up:
-	migrate -path migrations/ -database "postgresql://$(DB_USER):$(DB_PASSWORD)@$(DB_HOST):5432/word_counter?sslmode=disable" -verbose up
-
-down:
-	migrate -path migrations/ -database "postgresql://$(DB_USER):$(DB_PASSWORD)@$(DB_HOST):5432/word_counter?sslmode=disable" -verbose down --all
+download_texts:
+	mkdir files
+	curl https://www.gutenberg.org/cache/epub/98/pg98.txt -o files/a-tale-of-twi-cities.txt
 

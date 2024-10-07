@@ -1,38 +1,30 @@
-# Introduction
 
-## Install
+# Word Counter
+Word counter is a programming exercise to compare Rust, Go and Node to solve a basic HTTP services based challenge. 
 
-Install the go migration binary.
+I tend to work on backend HTTP services and these are the three languages I have chosen to pursue over time. Implementing the challenge in each language lets me contrast and compare them, and also serves as a talking point to potential employers and coding friends.
 
-## Postgres.
+## The Challenge
 
-For local installation you will probably need to tweak a couple of things:
-*
-1. Locate your pg_hba.conf file. On Fedora mine is `/var/lib/pgsql/data/pg_hba.conf`.
-2. Configure *local* connections to be trusted from "peer"
-
-```
-# "local" is for Unix domain socket connections only
-local   all             all                                     trust
-```
-
-3. Configure IPv4 connections on the host to use "md5" not ident or peer.
-
-```
-# IPv4 local connections:
-host    all             all             127.0.0.1/32            md5
-
-```
-
-
-## Event structure
+Any amount of text files holding human language words can be set into files. Each word in each file will be sent via a word counter *client* to a *server* in a JSON payload resembling this. The client should be processing multiple files in parallel. 
 
 ```json
-
 {
-    "title": "",
-    "sentence": "",
-    "lineNumber": ""
+    "title": "A Tale of Two Cities.",
+    "word": "The",
+    "wordNumber": "1"
 }
-
 ```
+
+The server receiving the JSON payload will then have two tasks:
+
+1) to store the word, along with the associated data, in a Postgres database that will allow for querying information about words in a title via HTTP GET services.
+2) to offer a HTTP service that can return the average length of a word in a given title, at any given moment while processing.
+
+The choice to use text files holding is really just a convenience for finding a dataset to play with. I like literature, so it lets me see interesting data as I build a coding exercise.
+
+Running `make download_texts` will bring down 10 texts into the `/files` directory for you.
+
+## Directory Layout
+
+There are two `clients` and three `servers`. The clients are written in Go and Rust, and the servers are written in Node, Go and Rust. 
